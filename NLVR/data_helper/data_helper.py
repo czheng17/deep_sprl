@@ -196,6 +196,7 @@ def image_feature_tensor(feature_data, label, max_length):
 
     return input_0, input_1, input_2, input_0_len, input_1_len, input_2_len, label
 
+
 # input_0, input_1, input_2, input_0_len, input_1_len, input_2_len = image_feature_tensor(feature_data, label, 10)
 # print(len(input_0))
 # print(len(input_0_len))
