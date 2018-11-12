@@ -34,15 +34,19 @@ input_tensor, input_length = sentence_to_tensor(word2index, sentences, CONFIG['M
 
 model = LSTMmodel(n_words, CONFIG['embed_size'], 9, CONFIG['hidden_size']).to(device)
 print(model)
-trainIters(input_0, input_1, input_2, input_tensor, input_0_len, input_1_len,
-           input_2_len, input_length, target, model, CONFIG['hidden_size'])
-
 
 input_data_test, sentences_test, label_test = read_file(CONFIG['TEST_DIR'])
 
 input_0_test, input_1_test, input_2_test, input_0_len_test, input_1_len_test, \
     input_2_len_test, target_test = image_feature_tensor(input_data_test, label_test, CONFIG['feature_length'])
 input_tensor_test, input_length_test = sentence_to_tensor(word2index, sentences_test, CONFIG['MAX_LENGTH'])
+
+
+trainIters(input_0, input_1, input_2, input_tensor, input_0_len, input_1_len,
+           input_2_len, input_length, target, model, CONFIG['hidden_size'],
+            input_0_test, input_1_test, input_2_test, input_tensor_test, input_0_len_test, input_1_len_test,
+            input_2_len_test, input_length_test, target_test
+           )
 
 testIters(input_0_test, input_1_test, input_2_test, input_tensor_test, input_0_len_test, input_1_len_test,
           input_2_len_test, input_length_test, target_test, model, CONFIG['hidden_size'])

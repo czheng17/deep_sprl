@@ -17,9 +17,9 @@ import math
 def begin_to_test(input1, input2, input3, input_sen, input1_len, input2_len, input3_len, input_sen_len,
                    target, model, hidden_size):
     hidden_tensor = model.initHidden(hidden_size)
-
-    # load  previously training model:
-    model.load_state_dict(torch.load(CONFIG['save_checkpoint_dir']))
+    #
+    # # load  previously training model:
+    # model.load_state_dict(torch.load(CONFIG['save_checkpoint_dir']))
 
     y_pred = model(input1, input2, input3, input_sen, input1_len, input2_len, input3_len, input_sen_len,
                    hidden_tensor, CONFIG['batch_size'], CONFIG['embed_size'], CONFIG['hidden_size'])
@@ -58,6 +58,10 @@ def testIters(input1, input2, input3, input_sen, input1_len, input2_len, input3_
     print(total_acc)
     print(input1_len.size()[0])
     print(float(total_acc) / input1_len.size()[0])
+
+    f = open(CONFIG['save_test_result_dir'], 'w')
+    f.write(str(float(total_acc) / input1_len.size()[0]))
+    f.close()
 
 
 

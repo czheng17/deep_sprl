@@ -20,5 +20,6 @@ CONFIG = {
     'learning_rate': 0.01,
     'TRAIN_DIR': '../data/tmp.json',
     'TEST_DIR': '../data/tmp.json',
-    'save_checkpoint_dir': '../check_point/2.pt'
+    'save_checkpoint_dir': '../check_point/2.pt',
+    'save_test_result_dir': '../result/test/result.txt'
 }
