@@ -61,9 +61,13 @@ def trainIters(input1, input2, input3, input_sen, input1_len, input2_len, input3
     for iter in range(1, CONFIG['n_iters'] + 1):
         for i in range(input1_len.size()[0]):
             # print('----->',input3_len[i])
-            loss = begin_to_train(input1[i], input2[i], input3[i], input_sen[i], input1_len[i], input2_len[i],
-                                  input3_len[i], input_sen_len[i], target[i], model, optimizer, criterion, hidden_size)
-            print_loss_total += loss
+            try:
+                loss = begin_to_train(input1[i], input2[i], input3[i], input_sen[i], input1_len[i], input2_len[i],
+                                      input3_len[i], input_sen_len[i], target[i], model, optimizer, criterion, hidden_size)
+                print_loss_total += loss
+            except:
+                print('the', i, 'th data has problem')
+
 
             if (iter*(input1.size()[0])+i) % CONFIG['print_every'] == 0:
                 print_loss_avg = print_loss_total / CONFIG['print_every']

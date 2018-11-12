@@ -14,10 +14,11 @@ CONFIG = {
     'MAX_LENGTH': 20,
     'SOS_token': 0,
     'EOS_token': 1,
-    'n_iters': 2,
-    'print_every': 1000,
+    'n_iters': 10,
+    'print_every': 1,
     'plot_every': 100,
     'learning_rate': 0.01,
     'TRAIN_DIR': '../data/tmp.json',
-    'save_checkpoint_dir': '../check_point/1.pt'
+    'TEST_DIR': '../data/tmp.json',
+    'save_checkpoint_dir': '../check_point/2.pt'
 }
