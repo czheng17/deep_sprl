@@ -16,13 +16,13 @@ import math
 
 def begin_to_test(input1, input2, input3, input_sen, input1_len, input2_len, input3_len, input_sen_len,
                    target, model, hidden_size):
-    hidden_tensor = model.initHidden(hidden_size)
+    # hidden_tensor = model.initHidden(hidden_size)
     #
     # # load  previously training model:
     # model.load_state_dict(torch.load(CONFIG['save_checkpoint_dir']))
 
     y_pred = model(input1, input2, input3, input_sen, input1_len, input2_len, input3_len, input_sen_len,
-                   hidden_tensor, CONFIG['batch_size'], CONFIG['embed_size'], CONFIG['hidden_size'])
+                   CONFIG['batch_size'], CONFIG['embed_size'], CONFIG['hidden_size'])
 
     # print('2', y_pred.view(-1,2))
     # # values, indices = torch.max(y_pred, 0)
@@ -50,10 +50,13 @@ def testIters(input1, input2, input3, input_sen, input1_len, input2_len, input3_
 
     for i in range(input1_len.size()[0]):
         # print('----->',input3_len[i])
-        acc = begin_to_test(input1[i], input2[i], input3[i], input_sen[i], input1_len[i], input2_len[i],
-                              input3_len[i], input_sen_len[i], target[i], model,
-                              hidden_size)
-        total_acc += acc
+        try:
+            acc = begin_to_test(input1[i], input2[i], input3[i], input_sen[i], input1_len[i], input2_len[i],
+                                  input3_len[i], input_sen_len[i], target[i], model,
+                                  hidden_size)
+            total_acc += acc
+        except:
+            print('the', i, 'th data has problem')
 
     print(total_acc)
     print(input1_len.size()[0])

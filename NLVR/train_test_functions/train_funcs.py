@@ -33,12 +33,12 @@ def timeSince(since, percent):
 
 def begin_to_train(input1, input2, input3, input_sen, input1_len, input2_len, input3_len, input_sen_len,
                    target, model, optimizer, criterion, hidden_size):
-    hidden_tensor = model.initHidden(hidden_size)
+    # hidden_tensor = model.initHidden(hidden_size)
     optimizer.zero_grad()
     # input_length = input_sen.size(0)
 
     y_pred = model(input1, input2, input3, input_sen, input1_len, input2_len, input3_len, input_sen_len,
-                   hidden_tensor, CONFIG['batch_size'], CONFIG['embed_size'], CONFIG['hidden_size'])
+                   CONFIG['batch_size'], CONFIG['embed_size'], CONFIG['hidden_size'])
 
     # print('2', y_pred.view(-1,2))
     # # values, indices = torch.max(y_pred, 0)
@@ -80,8 +80,9 @@ def trainIters(input1, input2, input3, input_sen, input1_len, input2_len, input3
             #     print_loss_total = 0
             #     print('%s (%d %d%%) %.4f' % (timeSince(start, iter / CONFIG['n_iters']),
             #                                  iter, iter / CONFIG['n_iters'] * 100, print_loss_avg))
-        testIters(input_0_test, input_1_test, input_2_test, input_tensor_test, input_0_len_test, input_1_len_test,
-                  input_2_len_test, input_length_test, target_test, model, CONFIG['hidden_size'])
+        if iter % 10 == 0:
+            testIters(input_0_test, input_1_test, input_2_test, input_tensor_test, input_0_len_test, input_1_len_test,
+                      input_2_len_test, input_length_test, target_test, model, CONFIG['hidden_size'])
 
     # after training, save  model
     torch.save(model.state_dict(), CONFIG['save_checkpoint_dir'])
